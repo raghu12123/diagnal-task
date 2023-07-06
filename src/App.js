@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { Nav, Navbar, Container, Form, Row, Col, Card } from "react-bootstrap";
+import { Nav, Navbar, Container, Form, Row, Col, Card, Image} from "react-bootstrap";
 import { FaArrowLeft, FaSearch } from "react-icons/fa";
 import useInfiniteScroll from "react-infinite-scroll-hook";
+import './App.css'
+import backIcon from './images/Back.png'
+import searchIcon from './images/search.png'
+
 export default function App() {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [searchInput, setSearchInput] = useState();
@@ -68,12 +72,12 @@ export default function App() {
   });
 
   return (
-    <div>
-      <Navbar variant="dark" expand="lg" bg="transparent">
+    <>
+      <Navbar variant="dark" sticky='top' className="bgimage">
         <Container className="d-flex justify-content-between">
           <Nav>
             <Navbar.Brand href="#">
-              <FaArrowLeft /> Romantic Comedy
+            <Image src={backIcon} style={{"width":"20px"}}/> Romantic Comedy
             </Navbar.Brand>
           </Nav>
           <Form>
@@ -88,7 +92,7 @@ export default function App() {
               />
             ) : (
               <div >
-                <FaSearch color="white"
+                <Image src={searchIcon} style={{"width":"20px"}}
                 onClick={handleSearchIconClick}
               />
               </div>
@@ -127,6 +131,6 @@ export default function App() {
           )}
         </Row>
       </div>
-    </div>
+    </>
   );
 }
