@@ -1,10 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Nav, Navbar, Container, Form, Row, Col, Card, Image} from "react-bootstrap";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import './App.css'
 import backIcon from './images/Back.png'
 import searchIcon from './images/search.png'
+import noImage from './images/posterthatismissing.png'
+ export function ValidImage(url) {
+const [imageUrl,setImageUrl]= useState(null)
+const checkUrl=url.src
+//console.log('l'+checkUrl)
+  async function fetchImage(){
+    const res= await fetch("https://test.create.diagnal.com/images/"+checkUrl)
+    const status= res.status
+if(status===200)
+{
+  setImageUrl("https://test.create.diagnal.com/images/"+checkUrl)
+}
+else{
+  setImageUrl(noImage)
 
+}
+  }
+
+  useEffect(()=>{
+    fetchImage()
+  },[])
+
+return(
+<Card.Img
+variant="top"
+src={imageUrl}
+/>
+)
+ }
 export default function App() {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [searchInput, setSearchInput] = useState();
@@ -108,14 +136,7 @@ export default function App() {
                 <Col key={index} xs={4}>
                   <Card bg="transparent" style={{ border: "none" }}>
                 
-                    <Card.Img
-                      variant="top"
-                      src={
-                        "https://test.create.diagnal.com/images/" +
-                        item["poster-image"]
-                      }
-                    />
-                 
+                  <ValidImage src={item["poster-image"]}/>
                     <Card.Title className="text-truncate"style={{ color: "white", fontSize: "14px",marginTop:"5px" }}>
                       {item.name}
                     </Card.Title>
