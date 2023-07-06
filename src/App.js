@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Nav, Navbar, Container, Form, Row, Col, Card, Image} from "react-bootstrap";
-import { FaArrowLeft, FaSearch } from "react-icons/fa";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import './App.css'
 import backIcon from './images/Back.png'
